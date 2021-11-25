@@ -1,0 +1,19 @@
+.size-buttons{
+    display:flex;
+    width:fit-content;
+}
+
+.size-button{
+    border-style:none;
+    width:63px;
+    height:45px;
+    margin-right:10px;
+    border:1px solid #1D1F22;
+    background-color: transparent;
+}
+
+.size-button:hover {
+    cursor:pointer;
+    color:white;
+    background-color: #1D1F22;
+}

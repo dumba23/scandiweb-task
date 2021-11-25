@@ -1,0 +1,21 @@
+.add-to-cart{
+    background-color: #5ECE7B;
+    color:white;
+    font-size:16px;
+    border-style:none;
+    width:282px;
+    height:45px;
+}
+
+.add-to-cart:hover{
+    opacity:0.61234798 ;
+}
+
+.add-to-cart-disabled{
+    background-color: #5ece7c5d;
+    color:white;
+    font-size:16px;
+    border-style:none;
+    width:282px;
+    height:45px;
+}

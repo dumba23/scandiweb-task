@@ -1,0 +1,25 @@
+.item-container{
+    display:flex;
+    width:1440px;
+    height:745px; 
+}
+
+
+.item-container-1{
+    display:flex;
+    margin:10px 0px 10px 217px;
+    padding:0.5em;
+}
+
+.item-name{
+    font-size:25px;
+    margin-bottom: 35px;
+}
+
+.description{
+    font-size:18px;
+}
+
+.add-button{
+    width:fit-content;
+}

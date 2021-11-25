@@ -1,0 +1,58 @@
+figure{
+    margin:0px;
+}
+
+.outStock{
+    filter:blur(3px);
+}
+.textover{
+    position:relative;
+}
+
+.textover figcaption{
+    position: absolute;
+    bottom:148px;
+    left:90px;
+    top:146px;
+    font-size:24px;
+    font-family:Raleway;
+    font-style:normal;
+    font-weight:normal;
+    color:#8D8F9A;
+} 
+
+.products{   
+    display:flex;
+    flex-wrap:wrap;
+}
+
+.product-clothes{
+    display:flex;
+    align-items: center;
+    flex-direction: column;
+    width:386px;
+    height:370px;
+    margin:0px 90px 15px 0px;
+    padding:16px 0px 25px 0px; 
+}
+
+.product-clothes:hover{
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+.content-clothes{
+    width:354px;
+    height:38px;
+}
+
+.circle-icon img{
+    width:52px;
+    height:52px;
+    position:absolute;
+    transform:translate(145px,-23px);
+    display:none
+}
+
+.product-clothes:hover .circle-icon img{
+    display:block;
+}

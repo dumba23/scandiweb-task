@@ -1,0 +1,36 @@
+.cart-size-button{
+    display:flex;
+    flex-direction:row;
+}
+
+.cart-size-button button{
+    width:36px;
+    height:36px;
+    display:flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.cart-overlay-size-buttons{
+    
+    padding-top:25px;
+    display:flex;
+    justify-content: space-between;
+    max-width:140px;
+}
+
+.cart-overlay-buttons{
+    background-color: transparent;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width:28px;
+    height:28px;
+    border:1px solid black;
+}
+
+.cart-overlay-buttons:hover{
+    background-color: #1D1F22;
+    cursor:pointer;
+    color:white;  
+}

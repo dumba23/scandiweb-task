@@ -1,0 +1,28 @@
+
+.items-left{
+    display:flex;
+    flex-direction: column;
+    max-width: fit-content;
+    margin-right:30px;
+}
+
+.item-left{
+    padding:1px;
+    margin-bottom:5px;
+    margin-right:5px;
+}
+
+.item-left:hover{
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+
+.item-main{
+    padding:5px;
+    margin-right:100px;
+    margin-left:25px;
+}
+
+.items-container{
+    display:flex;
+}
