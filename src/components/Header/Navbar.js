@@ -1,7 +1,9 @@
 import React, {Component} from 'react';
+import { Query } from 'react-apollo';
+import { CURRENCIES } from '../../queries';
 import { Link } from 'react-router-dom';
 import './Navbar.css';
-import Currency from '../Home/Currency';
+import Currency from './Currency';
 import Logo from './svgs/logo.png';
 import Cart from '../CartOverlay/svgs/cart.png';
 import CartOverlayList from '../CartOverlay/CartOverlayList';
@@ -23,7 +25,7 @@ export class Navbar extends Component{
 
     renderTotalItems(){
         var count = 0;
-        this.props.product.forEach((item)=>{  
+        this.props.product.forEach((item)=>{ 
             count += item.counter;  
         })
         return count;
@@ -43,14 +45,14 @@ export class Navbar extends Component{
                         </nav>
                         <nav className="navbar">
                         <Link to="/">
-                        <button className="navbar-brand" value='1' onClick={this.handleChange} style={this.props.activeCategory === '1' ? {color:"green", borderBottom:"2px solid green"} : {color:"black"}}>
+                        <button className="navbar-brand" value='tech' onClick={this.handleChange} style={this.props.activeCategory === 'tech' ? {color:"green", borderBottom:"2px solid green"} : {color:"black"}}>
                             Tech
                         </button>
                         </Link>
                         </nav>
                         <nav className="navbar">
                         <Link to="/">
-                        <button className="navbar-brand" value='0' onClick={this.handleChange} style={this.props.activeCategory === '0' ? {color:"green",  borderBottom:"2px solid green"} : {color:"black"}}>
+                        <button className="navbar-brand" value='clothes' onClick={this.handleChange} style={this.props.activeCategory === 'clothes' ? {color:"green",  borderBottom:"2px solid green"} : {color:"black"}}>
                             Clothes
                         </button>
                         </Link>
@@ -61,10 +63,20 @@ export class Navbar extends Component{
                         <img alt="logo" src={Logo} />
                         </Link>
                     </div>
-                    <div className="actions">   
-                        <Currency onCurrencyChange={this.props.onCurrencyChange}/>
+                    <div className="actions">  
+                    <Query query={CURRENCIES}>
+                        {
+                        ({ loading, error, data })=>{
+                                    if(loading) return <h4>Loading...</h4>
+                                    if(error) console.log(error);
+                                    if(data){
+                                        return <Currency currencies={data.currencies} currency={this.props.currency} onCurrencyChange={this.props.onCurrencyChange} currencySwitcher={this.props.currencySwitcher} currencyOpen={this.props.currencyOpen}/>
+                                    }
+                                    }
+                                }
+                        </Query>
                         
-                    <div className="cart-button" onClick={this.toggle} style={{backgroundImage: `url(${Cart})`  }}>
+                    <div className="cart-button" onClick={this.toggle} style={{backgroundImage: `url(${Cart})`, cursor:'pointer'  }}>
                        {this.props.toggleCount>0 &&  <div className="cart-count">{this.renderTotalItems()}</div> }
                     </div>    
                     <div>
@@ -72,6 +84,8 @@ export class Navbar extends Component{
                     this.props.toggleAns && 
                     <React.Fragment>
                     <CartOverlayList 
+                    selectedAttributes={this.props.selectedAttributes}
+                    attrChange={this.props.attrChangeFromCart}
                     count={this.props.toggleCount} 
                     product={this.props.product} 
                     currency={this.props.currency} 

@@ -12,10 +12,11 @@ class CartOverlayBackground extends Component{
     handleClick(){
         this.props.toggle(this.state.isHidden)
     }
+    
     render(){
         return(
             <div onClick={this.handleClick} className="cart-overlay-background">
-                
+                <div className="cart-overlay-background-white"></div>
             </div>
         )
     }

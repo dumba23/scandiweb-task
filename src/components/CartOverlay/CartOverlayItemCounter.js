@@ -18,11 +18,11 @@ export class CartOverlayItemCounter extends Component{
 
     handleClickOnPlus = () =>{
         this.setState({ count: this.state.count+1 },this.handleCountItems);
-        this.props.countSelectedItem(this.props.itemId, this.props.itemSelectedColor, this.props.itemSelectedSize, this.props.item.item);
+        this.props.countSelectedItem(this.props.itemId, this.props.selectedAttributes, this.props.item.item);
     }
     handleClickOnMinus = () =>{
         this.setState({ count: this.state.count-1 },this.handleCountItems);
-        this.props.deleteItem(this.props.itemId, this.props.itemSelectedColor, this.props.itemSelectedSize, this.props.item.item);
+        this.props.deleteItem(this.props.itemId, this.props.selectedAttributes, this.props.item.item);
         
     }
 

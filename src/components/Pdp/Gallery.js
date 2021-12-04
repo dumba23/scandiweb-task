@@ -20,14 +20,14 @@ export class Gallery extends Component{
                     {
                     this.props.gallery.map((item)=>{
                         return <div className="item-left" key={item} value={item} onClick={e=>this.handleChange(e.target.src)}>
-                                <img alt="product" src={item} width="120px" height="100px"></img>
+                                <img alt="product" src={item} max-width="120px" height="100px"></img>
                                 </div>
                     })
                     }
                 </div>
                 <div className="item-main">
                     {
-                    <img alt="product" src={this.state.currentSrc} width="610px" height="511px"></img>
+                    <img alt="product" src={this.state.currentSrc} max-width="610px" height="511px"></img>
                     }
                 </div>
             </div>

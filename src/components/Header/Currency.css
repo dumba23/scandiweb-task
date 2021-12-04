@@ -1,0 +1,33 @@
+select{
+    transform:translateX(-30px);
+    width:32px;
+    height:29px;
+    border-style:none;
+}
+
+
+.currency-container {
+    transform:translateX(-30px);
+    margin-top:5px;
+    font-size:18px;
+    z-index:5;
+    font-family:Raleway,sans-serif;
+}
+
+.dropdown-currency{
+    cursor:pointer;
+}
+
+.dropdown-items{
+    cursor:pointer;
+    position:relative;
+    transform:translateY(30px);
+    padding-left:20px;
+    width:70px;
+    background-color: white;
+    box-shadow: 0 4px 6px 0 rgba(0, 0, 0, 0.2), 0 6px 10px 0 rgba(0, 0, 0, 0.19);
+}
+
+.current-currency{
+    position:fixed;
+}

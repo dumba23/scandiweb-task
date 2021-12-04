@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import CartOverlayItem from '../CartOverlay/CartOverlayItem';
 import CartOverlayItemCounter from '../CartOverlay/CartOverlayItemCounter';
-import CartOverlayItemImg from '../CartOverlay/CartOverlayItemImg';
+import CartImg from './CartImg';
 import './Cart.css';
 
 export class Cart extends Component{
@@ -32,14 +32,19 @@ export class Cart extends Component{
                             return (
                             <div className='cart-content' key={item.itemId}>
                             <div className="cart-content-left" key={item.item[0].name}>
-                            <CartOverlayItem  product={item} currency={this.props.currency} price={item.item[0].prices} />
+                            <CartOverlayItem 
+                            selectedAttributes={this.props.selectedAttributes}
+                            attrChange={this.props.attrChange} 
+                            product={item} 
+                            currency={this.props.currency} 
+                            price={item.item[0].prices} 
+                            />
                             </div>
                             <div className="cart-content-right">
                             <div className="cart-counter">
                                 <CartOverlayItemCounter 
                                 itemId={item.itemId}
-                                itemSelectedColor={item.color}
-                                itemSelectedSize={item.size}
+                                selectedAttributes={item.selectedAttributes}
                                 item={item}
                                 quantity={item.counter}
                                 countItems={this.sumOfItem} 
@@ -49,7 +54,7 @@ export class Cart extends Component{
                                 countSelectedItem={this.props.countSelectedItem}
                                 />
                                 </div>
-                            <div className="cart-img"><CartOverlayItemImg images={item.item[0].gallery} width={'151px'} height={'185px'}/></div>
+                            <div className="cart-img"><CartImg images={item.item[0].gallery} width={'151px'} height={'185px'}/></div>
                             </div>
                             </div>
                             )

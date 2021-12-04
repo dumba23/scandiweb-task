@@ -1,4 +1,5 @@
 import React , { Component } from 'react';
+import getSymbolFromCurrency from 'currency-symbol-map';
 import { withRouter } from 'react-router-dom';
 
 import CartOverlayItem from './CartOverlayItem';
@@ -39,7 +40,7 @@ export class CartOverlayList extends Component{
             total += price.amount* element.counter;
             return total;
         })
-        return this.handleCurrencies(this.props.currency) + total.toFixed(2);
+        return getSymbolFromCurrency(this.props.currency) + total.toFixed(2);
     }
 
     sumOfItem(x){
@@ -67,17 +68,19 @@ export class CartOverlayList extends Component{
                         {  
                             this.props.product.map((item)=>{
                             return (
-                            <div className="cart-overlay-list-content" key={item.itemId}>
+                            <div className="cart-overlay-list-content" key={JSON.stringify(item.selectedAttributes)}>
+                            <div className="left-content">
                             <CartOverlayItem  
+                            selectedAttributes={this.props.selectedAttributes}
+                            attrChange={this.props.attrChange}
                             product={item} 
                             currency={this.props.currency} 
                             price={item.item[0].prices} 
-                            quantity={item.counter}
                             />
+                            </div>
                             <CartOverlayItemCounter 
                             itemId={item.itemId}
-                            itemSelectedColor={item.color}
-                            itemSelectedSize={item.size}
+                            selectedAttributes={item.selectedAttributes}
                             item={item}
                             quantity={item.counter}
                             countItems={this.sumOfItem} 
@@ -86,10 +89,12 @@ export class CartOverlayList extends Component{
                             deleteItem={this.props.toDeleteItem}
                             countSelectedItem={this.props.countSelectedItem}
                             />
+                            <div className="cart-overlay-img">
                             <CartOverlayItemImg 
                             images={item.item[0].gallery} 
                             width={'105px'} 
                             height={'137px'}/>
+                            </div>
                             </div>
                             )
                             })

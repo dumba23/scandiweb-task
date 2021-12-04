@@ -1,5 +1,4 @@
 import React, {Component} from 'react';
-import { withRouter } from 'react-router-dom';
 import './AddButton.css';
 
 export class AddButton extends Component{
@@ -11,8 +10,7 @@ export class AddButton extends Component{
     handleAdd(){
         const finalProduct=[this.props.product]
         let productId = this.props.product.id;
-        this.props.onAdd(finalProduct,productId)
-        this.props.history.push("/");
+        this.props.onAdd(finalProduct,productId,this.props.selectedAttributes);      
     }
 
     render(){
@@ -28,7 +26,7 @@ export class AddButton extends Component{
         return (
             <div>
                 <button className="add-to-cart-disabled" disabled={true}>
-                    ADD TO CART
+                    OUT OF STOCK
                 </button>
             </div>
             );
@@ -36,4 +34,4 @@ export class AddButton extends Component{
 }
 
 
-export default withRouter(AddButton);
+export default AddButton;

@@ -1,57 +1,29 @@
 import React,{ Component } from 'react';
-import gql from 'graphql-tag';
 import { Query } from 'react-apollo';
+import { CATEGORIES } from '../../queries';
 import ProductList from './ProductList';
 import './Category.css'
 
-const CATEGORIES_QUERY = gql`
-    query CategoryQuery{
-        categories {
-            name
-            products {
-              id
-              name
-              inStock
-              gallery
-              description
-              prices {
-                amount
-                currency
-                }
-            attributes {
-                type
-                items {
-                    displayValue
-                    }
-                }
-            }
-        }
-    }
-`;
-
 export class Category extends Component {
-
 render() { 
+    const { activeCategory } = this.props;
     return(          
         <div className="container-products">
-            <Query query={CATEGORIES_QUERY}>
+            <Query query={CATEGORIES}  variables={{input:activeCategory}}>
                 {
                     ({ loading, error, data })=>{
                         if(loading) return <h4>Loading...</h4>
                         if(error) console.log(error);
-                        if(this.props.activeCategory === ""){
+                        if(data){
                             return (
                                 <ProductList 
                                 onOpen={this.props.onOpen}
-                                products={[data.categories[0].products, data.categories[1].products]} 
-                                categoryName={"all"} 
+                                products={data.category.products} 
+                                categoryName={data.category.name} 
                                 changeCurrency={this.props.activeCurrency}
                                 />                                
                             )
-                        }else 
-                        return (
-                           <ProductList onOpen={this.props.onOpen} products={data.categories[this.props.activeCategory].products} categoryName={data.categories[this.props.activeCategory].name} changeCurrency={this.props.activeCurrency}/>
-                        );
+                        }
                     }
                 }
             </Query>

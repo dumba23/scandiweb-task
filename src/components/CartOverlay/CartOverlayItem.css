@@ -6,9 +6,9 @@
 
 .price-comp{
     font-weight:bold;
-    font-size:30px;
+    font-size:20px;
     transform:translateY(25px);
-  
+    margin-bottom:15px;
 }
 
 .cart-overlay-item-content{

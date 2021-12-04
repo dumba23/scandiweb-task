@@ -1,17 +1,10 @@
 import React, { Component } from 'react';
 
 class CartOverlayItemImg extends Component{
-    constructor(props){
-        super(props)
-        this.state={
-            currImg:0
-        }
-    }
-
     render(){
         return(
             <div>
-                <img src={this.props.images[this.state.currImg]} alt="img" style={{width:`${this.props.width}`, height:`${this.props.height}`, paddingTop:'5px', }}/>
+                <img src={this.props.images[0]} alt="img" style={{maxWidth:`${this.props.width}`, maxHeight:`${this.props.height}`, paddingTop:'5px', }}/>
             </div>
         );
     }

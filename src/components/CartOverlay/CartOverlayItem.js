@@ -1,25 +1,19 @@
 import React, { Component } from 'react';
 import Price from '../Pdp/Price';
-import CartOverlaySize from './CartOverlaySize';
 import './CartOverlayItem.css';
- 
+import CartOverlaySizeTest from './CartOverlaySizeTest';
+  
 export class CartOverlayItem extends Component{
     render(){
         return(
             <div className="cart-overlay-item-content">
-                <div className="cart-overlay-product-name">{this.props.product.item[0].name}</div>     
-                <div className="price-comp">{<Price price={this.props.price} currency={this.props.currency} />}</div>      
-                <div className="item-sizes">
-                <CartOverlaySize attributes={this.props.product.item[0].attributes} attributesIndex={0} selectedAttributes={{color:this.props.product.color,size:this.props.product.size}}/>
-                {this.props.product.item[0].attributes.length > 1 ?
-                    <CartOverlaySize attributes={this.props.product.item[0].attributes} attributesIndex={1} selectedAttributes={{color:this.props.product.color,size:this.props.product.size}}/>
-                    :
-                    null
-                }
-                </div>
-                <div>
-                    
-                </div>
+                <div className="cart-overlay-product-name">
+                    <span style={{fontWeight:"bold"}}>{this.props.product.item[0].brand}</span>
+                    <br/>
+                    {this.props.product.item[0].name}
+                    </div>     
+                <div className="price-comp">{<Price price={this.props.price} currency={this.props.currency} />}</div> 
+                <div ><CartOverlaySizeTest selectedAttr={this.props.selectedAttributes} item={this.props.product.item} attrChange={this.props.attrChange} itemId={this.props.product.item[0].id} selectedAttributes={this.props.product.selectedAttributes} allAttributes={this.props.product.item[0].attributes}/></div>     
             </div>
         );
     }

@@ -1,4 +1,5 @@
 import React, {Component} from 'react';
+import getSymbolFromCurrency from 'currency-symbol-map';
 import { withRouter } from 'react-router';
 import PropTypes from 'prop-types';
 
@@ -13,18 +14,6 @@ export class Price extends Component{
         location: PropTypes.object.isRequired,
     };
 
-    handleCurrencies = (param) => {
-        if (param==="USD"){
-            return "$"
-        }
-        if (param==="GBP"){
-            return "€"
-        }
-        if(param==="JPY"){
-            return "¥"
-        }
-    }
-
     render(){
     const { location } = this.props;
     const handleName = () =>{
@@ -38,7 +27,7 @@ export class Price extends Component{
                     {handleName()}
                 </div>
                 <div className="price-amount">
-                    {this.handleCurrencies(this.props.currency)}
+                    {getSymbolFromCurrency(this.props.currency)}
                     {
                        this.props.price.map((price)=>{
                            

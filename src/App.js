@@ -8,9 +8,10 @@ import Pdp from './components/Pdp/Pdp';
 import Cart from './components/Cart/Cart';
 import CartOverlayBackground from './components/CartOverlay/CartOverlayBackground';
 
+
 const client = new ApolloClient({
   uri: 'http://localhost:4000/'
-});
+})
 
 export class App extends Component{
   constructor(props){
@@ -19,32 +20,79 @@ export class App extends Component{
     this.handleCategoryChange = this.handleCategoryChange.bind(this);
     this.handleItemOpen = this.handleItemOpen.bind(this);
     this.handleAddItem = this.handleAddItem.bind(this);
-    this.handleSize = this.handleSize.bind(this);
-    this.handleColor = this.handleColor.bind(this);
     this.toggleHidden = this.toggleHidden.bind(this);
     this.deleteItemFromCartByIndex = this.deleteItemFromCartByIndex.bind(this);
     this.addItemFromCart = this.addItemFromCart.bind(this);
+    this.toggleCurrencySwitcherHide = this.toggleCurrencySwitcherHide.bind(this);
+    this.handleSelectedAttributes = this.handleSelectedAttributes.bind(this);
+    this.handleAddButton = this.handleAddButton.bind(this);
+    this.attributeChangeFromCart = this.attributeChangeFromCart.bind(this);
     this.state={
         currency: 'USD',
         category: '',
         item: null,
         addItem: [],
-        size: null,
-        color: null,
         isHidden:false,
-        selectedItem:[],
+        isCurrencySwitcherHidden:false,
+        selectedAttributes:[],
     };
   }
 
-  addItemFromCart = (itemId,color,size,item) =>{
+  attributeChangeFromCart(itemId, selected,item){
     this.setState((prevState)=>{
       let updatedCartItems = prevState.addItem.map((element)=>{
-        if(element.itemId === itemId && element.color === color && element.size === size){
+        const isSame = element.selectedAttributes.find(
+          attr => 
+               selected.find(
+                selectedAttr =>
+                 attr.id === selectedAttr.id && attr.value === selectedAttr.value,
+              )
+        )
+        if(element.itemId === itemId && Boolean(isSame)){
           return {
             item,
             itemId,
-            color,
-            size,
+            selectedAttributes:this.state.selectedAttributes,
+            counter: element.counter,
+          };
+        }
+        return element;
+      })
+      return{
+        addItem: updatedCartItems
+      }
+    }) 
+  }
+
+  handleAddButton(){
+    this.setState({selectedAttributes:[]})
+  }
+
+  handleSelectedAttributes(id,value,itemId){
+    this.setState((prevState) => ({
+      selectedAttributes: prevState.selectedAttributes.some((thingy) => thingy.id === id)
+        ? prevState.selectedAttributes.map((thingy) =>
+            thingy.id === id ? { ...thingy, value, itemId } : thingy
+          )
+        : prevState.selectedAttributes.concat({ id, value, itemId }),
+    }));
+  }
+
+  addItemFromCart = (itemId,selected,item) =>{
+    this.setState((prevState)=>{
+      let updatedCartItems = prevState.addItem.map((element)=>{
+        const isSame = element.selectedAttributes.find(
+          attr => 
+               selected.find(
+                selectedAttr =>
+                 attr.id === selectedAttr.id && attr.value === selectedAttr.value,
+              )
+        )
+        if(element.itemId === itemId && Boolean(isSame)){
+          return {
+            item,
+            itemId,
+            selectedAttributes:selected,
             counter: element.counter + 1,
           };
         }
@@ -56,15 +104,21 @@ export class App extends Component{
     }) 
   }
 
-  deleteItemFromCartByIndex(itemId,color,size,item){
+  deleteItemFromCartByIndex(itemId,selected,item){
     this.setState((prevState)=>{
       let updatedCartItems = prevState.addItem.map((element)=>{
-        if(element.itemId === itemId && element.color === color && element.size === size ){
+        const isSame = element.selectedAttributes.find(
+          attr => 
+               selected.find(
+                selectedAttr =>
+                 attr.id === selectedAttr.id && attr.value === selectedAttr.value,
+              )
+        )
+        if(element.itemId === itemId && Boolean(isSame)){
           return {
             item,
             itemId,
-            color,
-            size,
+            selectedAttributes:selected,
             counter: element.counter - 1, 
         }
       }
@@ -77,56 +131,79 @@ export class App extends Component{
         
   }
   
+  toggleCurrencySwitcherHide(){
+    this.setState({isCurrencySwitcherHidden:!this.state.isCurrencySwitcherHidden})
+  }
+
   toggleHidden(){
     this.setState({isHidden:!this.state.isHidden})
   }
 
-  handleColor(color){
-    this.setState({color:color})
-  }
-
-  handleSize(size){
-    this.setState({size:size})
-  }
-
-  handleAddItem = (product, productId) => {
-    if(this.state.addItem.length === 0){
-      this.setState({addItem:[...this.state.addItem, 
-        {
-        item:product,
-        itemId:productId,
-        color:this.state.color,
-        size:this.state.size,
-        counter:1
-      }]})
-    }else {
-    this.setState((prevState)=>{
-      let updatedCartItems = prevState.addItem.map((element)=>{
-        if(element.itemId === productId && element.color === this.state.color && element.size === this.state.size){
-          return {
-            item:product,
-            itemId:productId,
-            color:this.state.color,
-            size:this.state.size,
-            counter: element.counter + 1,
-          };
-        } 
-        this.setState({addItem:[...this.state.addItem, 
-          {
-          item:product,
-          itemId:productId,
-          color:this.state.color,
-          size:this.state.size,
-          counter:1
-        }]})
-      })
-      return{
-        addItem: updatedCartItems
+  handleAddItem = (product, itemId, selected) => {
+    
+    const attributeSortFunc = ( a, b ) => {
+      if ( a.id < b.id ){
+        return -1;
       }
-    }) 
-  }
-  }
+      if ( a.id > b.id ){
+        return 1;
+      }
+      return 0;
+    }
 
+    const compareAttributes = (attrs, attrs2) => {
+      for (const key in attrs) {
+        if (attrs[key] !== attrs2[key]){
+          return false;
+        }
+      }
+      return true;
+    }
+
+    this.setState((prevState) => {
+
+        const foundIndex = prevState.addItem.findIndex(item =>{
+          if(item.selectedAttributes.length !== selected.length) return false;
+
+          const sortedAttributes = item.selectedAttributes.sort(attributeSortFunc);
+          const sortedNewAttributes = selected.sort(attributeSortFunc);
+
+          for(let i = 0; i < sortedAttributes.length; i++){
+            if(!compareAttributes(sortedAttributes[i], sortedNewAttributes[i])){
+              return false;
+            }
+          }
+          return true;
+          
+        });
+
+          const updatedItemsArr = prevState.addItem.map((item, i) => {
+            if(i === foundIndex){
+                return ({
+                    ...item,
+                    counter: item.counter + 1
+                })
+            }
+
+            return item;
+        })
+
+        if(foundIndex === -1){
+            updatedItemsArr.push({
+                item:product,
+                itemId:itemId,
+                selectedAttributes:selected,
+                counter:1
+            })
+        }
+
+        return ({
+            addItem: updatedItemsArr
+        })
+
+    });
+  };
+    
   handleItemOpen(currentItem){
     this.setState({item:currentItem})
   }
@@ -148,8 +225,10 @@ export class App extends Component{
   }
 
   render(){
+    console.log(this.state.selectedAttributes)
     return (
       <Router>
+        <ApolloProvider client={client}>
         <div className="container">
         <Navbar 
         activeCategory={this.state.category} 
@@ -160,18 +239,18 @@ export class App extends Component{
         toggleCount={this.state.addItem.length} 
         product={this.state.addItem} 
         currency={this.state.currency}
-        color ={this.state.color}
-        size ={this.state.size}
         toDeleteItem={this.deleteItemFromCartByIndex}
         countSelectedItem={this.addItemFromCart}
+        currencySwitcher={this.toggleCurrencySwitcherHide}
+        currencyOpen={this.state.isCurrencySwitcherHidden}
+        attrChangeFromCart={this.attributeChangeFromCart}
+        selectedAttributes={this.handleSelectedAttributes} 
         />
         {
           this.state.isHidden ? 
         <CartOverlayBackground toggle={this.toggleHidden}/>:
         ''
         }
-        <ApolloProvider client={client}>
-        
             <Route exact path="/"  render = {() => 
             <Category 
             activeCategory={this.state.category} 
@@ -179,29 +258,32 @@ export class App extends Component{
             onOpen={this.handleItemOpen}/> 
             }/>
             <Route path="/PDP" render = {() => 
-            <Pdp 
+            <Pdp
+            attributesToStyle={this.state.selectedAttributes}
+            clearSelectedAttributes={this.handleAddButton}
+            attributes={this.state.selectedAttributes}
+            selectedAttributes={this.handleSelectedAttributes} 
             product={this.state.item} 
             currency={this.state.currency} 
             onAdd={this.handleAddItem} 
             attributeChoose={this.handleAttributes} 
-            handleSize={this.handleSize} 
-            handleColor={this.handleColor}/>
+            />
             }/>
              <Route path="/Cart" render = {() =>
              <Cart 
+             attrChange={this.attributeChangeFromCart}
+             selectedAttributes={this.handleSelectedAttributes} 
              product={this.state.addItem} 
              currency={this.state.currency}
              countSelectedItem={this.addItemFromCart}
              toDeleteItem={this.deleteItemFromCartByIndex}
              />
             }/>
-          
-        </ApolloProvider>
         </div>
+        </ApolloProvider>
       </Router>
     );
   }
 }
-
 
 export default App;
