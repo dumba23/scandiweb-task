@@ -71,7 +71,7 @@ SizeTest.propTypes = {
     attributes:PropTypes.array,
     selectedAttributes: PropTypes.func,
     itemId: PropTypes.string,
-    inStock: PropTypes.string
+    inStock: PropTypes.bool
 }
 
 
