@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 
 class CartOverlayItemImg extends Component{
     render(){
@@ -8,6 +9,12 @@ class CartOverlayItemImg extends Component{
             </div>
         );
     }
+}
+
+CartOverlayItemImg.propTypes = {
+    images:PropTypes.array,
+    width:PropTypes.string,
+    height:PropTypes.string
 }
 
 export default CartOverlayItemImg;

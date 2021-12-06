@@ -1,27 +1,24 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import './CartOverlayItemCounter.css';
 
 export class CartOverlayItemCounter extends Component{
     constructor(props){
         super(props)
         this.handleClickOnMinus = this.handleClickOnMinus.bind(this);
+        this.handleClickOnPlus = this.handleClickOnPlus.bind(this);
         this.handleCountItems = this.handleCountItems.bind(this);
-        this.state={
-            count:1,
-        }
     }
- 
 
-    handleCountItems = () =>{
+    handleCountItems  () {
         this.props.countItems(this.state.count);
     }
 
-    handleClickOnPlus = () =>{
-        this.setState({ count: this.state.count+1 },this.handleCountItems);
+    handleClickOnPlus  (){
         this.props.countSelectedItem(this.props.itemId, this.props.selectedAttributes, this.props.item.item);
     }
-    handleClickOnMinus = () =>{
-        this.setState({ count: this.state.count-1 },this.handleCountItems);
+
+    handleClickOnMinus () {
         this.props.deleteItem(this.props.itemId, this.props.selectedAttributes, this.props.item.item);
         
     }
@@ -39,6 +36,16 @@ export class CartOverlayItemCounter extends Component{
             </div>
         );
     }
+}
+
+CartOverlayItemCounter.propTypes = {
+    countItems:PropTypes.func,
+    countSelectedItem:PropTypes.func,
+    itemId:PropTypes.string,
+    selectedAttributes:PropTypes.array,
+    item:PropTypes.any,
+    deleteItem: PropTypes.func,
+    quantity:PropTypes.number,
 }
  
 export default CartOverlayItemCounter;

@@ -2,6 +2,8 @@ import React, {Component} from 'react';
 import { Query } from 'react-apollo';
 import { CURRENCIES } from '../../queries';
 import { Link } from 'react-router-dom';
+import PropTypes from 'prop-types';
+
 import './Navbar.css';
 import Currency from './Currency';
 import Logo from './svgs/logo.png';
@@ -103,5 +105,23 @@ export class Navbar extends Component{
         );
     }
 }
+
+Navbar.propTypes = {
+    onCategoryChange: PropTypes.func,
+    toggle: PropTypes.func,
+    product: PropTypes.array,
+    activeCategory: PropTypes.string,
+    currency: PropTypes.string,
+    onCurrencyChange: PropTypes.func,
+    currencySwitcher: PropTypes.func,
+    currencyOpen: PropTypes.bool,
+    toggleCount: PropTypes.number,
+    toggleAns: PropTypes.bool,
+    selectedAttributes: PropTypes.array,
+    attrChangeFromCart: PropTypes.func,
+    toDeleteItem: PropTypes.func,
+    countSelectedItem: PropTypes.func
+}
+
 
 export default Navbar;

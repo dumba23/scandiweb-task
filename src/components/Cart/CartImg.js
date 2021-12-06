@@ -1,4 +1,6 @@
 import React, {Component} from 'react';
+import PropTypes from 'prop-types';
+
 import Left from './svgs/left.png';
 import Right from './svgs/right.png';
 
@@ -37,6 +39,12 @@ export class CartImg extends Component{
             </div>
         );
     }
+}
+
+CartImg.propTypes = {
+    images: PropTypes.array,
+    width: PropTypes.string,
+    height: PropTypes.string
 }
 
 export default CartImg;

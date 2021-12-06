@@ -1,4 +1,5 @@
 import React, {Component} from 'react';
+import PropTypes from 'prop-types';
 import './SizeTest.css';
 
 export class SizeTest extends Component{
@@ -27,35 +28,36 @@ export class SizeTest extends Component{
         }));
       }
 
-      renderTypeText(value){
-        if(value.length>=5){
+      renderTypeText(value,name){
+        if(value.length>=5 && name === "Size"){
          if(value.indexOf(' ') > 0) {
              return value[0]+value[value.indexOf(' ')+1];
-         } return value[0]+value[1]+value[2]
+         } return value[0]
         }else return value;
      }
 
-
     render(){  
         return(
-            <div className="size-test-content">
+            <div >
                     {
                     this.props.attributes.map((item,index)=>{
                         return (
-                            <div className="btnn-sizetest" key={index}>
-                                <p>{item.name}:</p>
+                            <div className="size-test-content" key={index}>
+                                {`${item.name.toUpperCase()}:`}
+                            <div className="btnn-sizetest">
                                 {item.items.map((value,index)=>{
                                     return (
                                     <button
                                     key={index}
                                     value={value.displayValue} 
                                     onClick={e=>{this.props.selectedAttributes(item.id,e.target.value,this.props.itemId); this.handleSelectedAttributes(item.id,e.target.value)}}
-                                    style={this.isAttributeActive(item.id, value.displayValue) ? {backgroundColor:`${value.displayValue}`, opacity:'0.5' } :  {backgroundColor:`${value.displayValue}`}}
+                                    style={this.isAttributeActive(item.id, value.displayValue) && this.props.inStock ? {backgroundColor:`${value.displayValue}`, opacity:'0.5' } :  {backgroundColor:`${value.displayValue}`}}
                                     >
-                                        {item.type === 'text' ? this.renderTypeText(value.displayValue) : '' }
+                                        {item.type === 'text' ? this.renderTypeText(value.displayValue,item.name) : '' }
                                     </button>
                                     )
                                 })}
+                            </div>
                             </div>
                         );
                     })
@@ -64,5 +66,13 @@ export class SizeTest extends Component{
         )
     }
 }
+
+SizeTest.propTypes = {
+    attributes:PropTypes.array,
+    selectedAttributes: PropTypes.func,
+    itemId: PropTypes.string,
+    inStock: PropTypes.string
+}
+
 
 export default SizeTest;

@@ -1,4 +1,6 @@
 import React, {Component} from 'react';
+import PropTypes from 'prop-types';
+
 import CartOverlayItem from '../CartOverlay/CartOverlayItem';
 import CartOverlayItemCounter from '../CartOverlay/CartOverlayItemCounter';
 import CartImg from './CartImg';
@@ -28,9 +30,9 @@ export class Cart extends Component{
             <div>
                   <div className="cart-name">CART</div>    
                 {
-                this.props.product.map((item)=>{
+                this.props.product.map((item,index)=>{
                             return (
-                            <div className='cart-content' key={item.itemId}>
+                            <div className='cart-content' key={index}>
                             <div className="cart-content-left" key={item.item[0].name}>
                             <CartOverlayItem 
                             selectedAttributes={this.props.selectedAttributes}
@@ -64,5 +66,15 @@ export class Cart extends Component{
         );
     }
 }
+
+Cart.propTypes = {
+        product:PropTypes.array,
+        selectedAttributes:PropTypes.func,
+        attrChange: PropTypes.func,
+        currency: PropTypes.string,
+        toDeleteItem:PropTypes.func,
+        countSelectedItem:PropTypes.func
+}
+
 
 export default Cart;

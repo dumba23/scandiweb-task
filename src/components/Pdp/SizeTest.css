@@ -6,3 +6,10 @@
     border:1px solid #1D1F22;
     background-color: transparent;
 }
+
+.size-test-content{
+    font-family:Roboto,sans-serif;
+    font-weight:bold;
+    font-size:18px;
+    margin-top:10px;
+}

@@ -1,6 +1,8 @@
 import React, {Component} from 'react';
 import { Query } from 'react-apollo';
 import { PDP_QUERY } from '../../queries';
+import PropTypes from 'prop-types';
+
 import Gallery from './Gallery';
 import Price from './Price';
 import AddButton from './AddButton';
@@ -9,6 +11,10 @@ import SizeTest from './SizeTest';
 import DOMPurify from 'dompurify'
 
 export class Pdp extends Component{
+    componentWillUnmount(){
+        this.props.clearAttributes();
+    }
+
     cleanData(descr){
         return DOMPurify.sanitize(descr)
     }
@@ -33,13 +39,13 @@ export class Pdp extends Component{
                                                 <p>{this.props.product.name}</p>
                                                 </div>
                                                 <div className="item-name">
-                                                <SizeTest attributesToStyle={this.props.attributesToStyle} itemId={data.product.id} selectedAttributes={this.props.selectedAttributes} attributes={data.product.attributes}/>
+                                                <SizeTest inStock={this.props.product.inStock} attributesToStyle={this.props.attributesToStyle} itemId={data.product.id} selectedAttributes={this.props.selectedAttributes} attributes={data.product.attributes}/>
                                                 </div>
                                                 <div className="item-name">
                                                 <Price price={this.props.product.prices} currency={this.props.currency}  quantity={1}/>
                                                 </div>
                                                 <div className="add-button" >
-                                                <AddButton selectedAttributes={this.props.attributes} clearSelectedAttributes={this.props.clearSelectedAttributes} product={this.props.product} inStock={this.props.product.inStock} onAdd={this.props.onAdd} onClick={this.cutArr}/>
+                                                <AddButton selectedAttributes={this.props.attributes} product={this.props.product} inStock={this.props.product.inStock} onAdd={this.props.onAdd} onClick={this.cutArr}/>
                                                 </div>
                                                 <div className="description"
                                                 dangerouslySetInnerHTML={{__html: this.cleanData(this.props.product.description)}}  
@@ -56,5 +62,16 @@ export class Pdp extends Component{
         }return <h4>Go to home page</h4>
     }
 }
+
+Pdp.propTypes = {
+    product: PropTypes.object,
+    attributesToStyle: PropTypes.array,
+    selectedAttributes: PropTypes.func,
+    currency: PropTypes.string,
+    attributes: PropTypes.array,
+    onAdd: PropTypes.func,
+    clearAttributes: PropTypes.func
+}
+
 
 export default Pdp;

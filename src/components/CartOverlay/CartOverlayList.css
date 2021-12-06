@@ -1,12 +1,11 @@
 .cart-item{
     margin:16px;
     padding:16px;
-    margin-top:43px;
-    position:relative;
+    position:absolute;
     z-index:3;
     background-color: rgb(255, 255, 255);
     width:395px;
-    transform:translateX(-160px);
+    transform:translate(-480px,61px);
 }
 
 .left-content{

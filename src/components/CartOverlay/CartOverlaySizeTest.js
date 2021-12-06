@@ -1,9 +1,10 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import './CartOverlaySizeTest.css';
 
 class CartOverlaySizeTest extends Component{
-    attributeChange(){
-        this.props.attrChange(this.props.itemId, this.props.selectedAttributes, this.props.item)
+    attributeChange(id,value){
+        this.props.attrChange(this.props.itemId, this.props.selectedAttributes, this.props.item, id,value)
     }
 
     isAttributeActive(attrId,attrValue){
@@ -14,18 +15,16 @@ class CartOverlaySizeTest extends Component{
         return Boolean(isActive);
     } 
     
-    renderTypeText(value){
-       if(value.length>=5){
+    renderTypeText(value,name){
+       if(value.length>=5 && name === "Size"){
         if(value.indexOf(' ') > 0) {
             return value[0]+value[value.indexOf(' ')+1];
-        } return value[0]+value[1]+value[2]
+        }return value[0]
        }else return value;
     }
-
+ 
     render(){
-        console.log(this.props.selectedAttributes)
         return(
-            <div>
                 <div className="cart-size-test-content">
                     {
                     this.props.allAttributes.map((item,index)=>{
@@ -39,14 +38,14 @@ class CartOverlaySizeTest extends Component{
                                     className="cart-buttons-size"
                                     key={value.displayValue}
                                     value={value.displayValue} 
-                                    onClick={e => {this.attributeChange(); this.props.selectedAttr(item.name,e.target.value,this.props.itemId) }}
+                                    onClick={e => this.attributeChange(item.name,e.target.value,)}
                                     style={
                                         this.isAttributeActive(item.name, value.displayValue) ? { backgroundColor:`${value.displayValue}`, opacity:'0.4'} : {backgroundColor:`${value.displayValue}`}
                                         
                                     }
                                     
                                     >
-                                        {item.type === 'text' ? this.renderTypeText(value.displayValue) : null}
+                                        {item.type === 'text' ? this.renderTypeText(value.displayValue,item.name) : null}
                                     </button>
                                     )
                                 })}
@@ -56,9 +55,16 @@ class CartOverlaySizeTest extends Component{
                     })
                     }
             </div>
-            </div>
         );
     }
+}
+
+CartOverlaySizeTest.propTypes = { 
+    selectedAttributes:PropTypes.any,
+    attrChange: PropTypes.any,
+    itemId: PropTypes.any,
+    item: PropTypes.any,
+    allAttributes: PropTypes.any,
 }
 
 export default CartOverlaySizeTest;

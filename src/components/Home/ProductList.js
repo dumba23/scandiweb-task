@@ -1,4 +1,6 @@
 import React,{ Component } from 'react';
+import PropTypes from 'prop-types';
+
 import ProductItem from './ProductItem';
 import './ProductList.css';
 
@@ -26,4 +28,12 @@ export class ProductList extends Component {
         );
     }
 }
+
+ProductList.propTypes = {
+    categoryName: PropTypes.string,
+    products: PropTypes.array,
+    onOpen: PropTypes.func,
+    changeCurrency: PropTypes.string,
+}
+
 export default ProductList

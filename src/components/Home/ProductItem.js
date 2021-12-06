@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { withRouter } from 'react-router-dom';
+import PropTypes from 'prop-types';
 import getSymbolFromCurrency from 'currency-symbol-map';
-
 
 import circle from './svgs/circle-icon.png';
 import './ProductItem.css';
@@ -18,7 +18,7 @@ export class ProductItem extends Component{
         this.props.history.push("/PDP");
     }
  
-    handleInStockImg = () =>{
+    handleInStockImg(){
         if (this.props.product.inStock){
             return <img alt="product" src={this.props.product.gallery[0]} max-width="354px" height="330px"></img> 
         }else 
@@ -59,7 +59,15 @@ render(){
         </div>
         </div>
     );
+    }
 }
+
+
+ProductItem.propTypes = {
+    onOpen: PropTypes.func,
+    product: PropTypes.object,
+    history: PropTypes.object,
+    changeCurrency: PropTypes.string,
 }
 
 export default withRouter(ProductItem);

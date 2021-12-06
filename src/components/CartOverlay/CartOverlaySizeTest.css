@@ -1,7 +1,8 @@
 .cart-buttons-size {
-    width:28px;
+    width:45px;
     height:28px;
     margin-right:3px;
+    font-size:12px;
     display:flex;
     justify-content: center;
     align-items: center;

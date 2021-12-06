@@ -1,4 +1,5 @@
 import React , { Component } from 'react';
+import PropTypes from 'prop-types';
 import getSymbolFromCurrency from 'currency-symbol-map';
 import { withRouter } from 'react-router-dom';
 
@@ -18,18 +19,6 @@ export class CartOverlayList extends Component{
             deletedItemIndex:null,
             countItems:1,
             isHidden:false,
-        }
-    }
-
-    handleCurrencies = (param) => {
-        if (param==="USD"){
-            return "$"
-        }
-        if (param==="GBP"){
-            return "€"
-        }
-        if(param==="JPY"){
-            return "¥"
         }
     }
 
@@ -119,4 +108,16 @@ export class CartOverlayList extends Component{
     }
 }
  
+CartOverlayList.propTypes = { 
+    product: PropTypes.array, 
+    currency: PropTypes.string, 
+    history:PropTypes.object,
+    toggle:PropTypes.func,
+    count:PropTypes.number,
+    selectedAttributes:PropTypes.any,
+    countSelectedItem: PropTypes.func,
+    attrChange: PropTypes.func,
+    toDeleteItem: PropTypes.func,
+}
+
 export default withRouter(CartOverlayList);

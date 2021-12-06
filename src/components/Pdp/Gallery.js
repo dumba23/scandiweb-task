@@ -1,4 +1,5 @@
 import React , { Component } from 'react';
+import PropTypes from 'prop-types';
 import './Gallery.css';
 
 export class Gallery extends Component{
@@ -34,5 +35,10 @@ export class Gallery extends Component{
         );
     }
 }
+
+Gallery.propTypes = {
+    gallery: PropTypes.array
+}
+
 
 export default Gallery;

@@ -1,32 +1,15 @@
 import React, {Component} from 'react';
 import getSymbolFromCurrency from 'currency-symbol-map';
-import { withRouter } from 'react-router';
 import PropTypes from 'prop-types';
 
 export class Price extends Component{
-    constructor(){
-        super()
-        this.state={
-            totalPrice:0
-        }
-    }
-    static propTypes = {
-        location: PropTypes.object.isRequired,
-    };
-
     render(){
-    const { location } = this.props;
-    const handleName = () =>{
-        if(location.pathname === "/PDP") {
-            return "Price:"
-        }
-    }
         return(
             <div className="price-container">
-                <div className="price-name">
-                    {handleName()}
+                <div className="price-name" style={{fontSize:"18px", fontWeight:"bold"}}>
+                    {'PRICE:'}
                 </div>
-                <div className="price-amount">
+                <div className="price-amount" style={{fontSize:"20px", fontWeight:"bold"}}>
                     {getSymbolFromCurrency(this.props.currency)}
                     {
                        this.props.price.map((price)=>{
@@ -45,4 +28,9 @@ export class Price extends Component{
     }
 } 
 
-export default withRouter(Price); 
+Price.propTypes = {
+    currency: PropTypes.string,
+    price: PropTypes.array,
+}
+
+export default Price; 

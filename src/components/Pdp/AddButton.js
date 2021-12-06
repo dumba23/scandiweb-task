@@ -1,4 +1,5 @@
 import React, {Component} from 'react';
+import PropTypes from 'prop-types';
 import './AddButton.css';
 
 export class AddButton extends Component{
@@ -10,7 +11,7 @@ export class AddButton extends Component{
     handleAdd(){
         const finalProduct=[this.props.product]
         let productId = this.props.product.id;
-        this.props.onAdd(finalProduct,productId,this.props.selectedAttributes);      
+        this.props.onAdd(finalProduct,productId,this.props.selectedAttributes);
     }
 
     render(){
@@ -33,5 +34,11 @@ export class AddButton extends Component{
     }
 }
 
+AddButton.propTypes = {
+    product: PropTypes.object,
+    onAdd: PropTypes.func,
+    selectedAttributes: PropTypes.array,
+    inStock: PropTypes.bool,
+}
 
 export default AddButton;

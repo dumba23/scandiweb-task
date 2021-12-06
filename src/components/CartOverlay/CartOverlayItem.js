@@ -1,4 +1,6 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
+
 import Price from '../Pdp/Price';
 import './CartOverlayItem.css';
 import CartOverlaySizeTest from './CartOverlaySizeTest';
@@ -17,6 +19,14 @@ export class CartOverlayItem extends Component{
             </div>
         );
     }
+}
+
+CartOverlayItem.propTypes = {
+    product:PropTypes.object,
+    price:PropTypes.array,
+    currency:PropTypes.string,
+    selectedAttributes:PropTypes.any,
+    attrChange:PropTypes.func
 }
 
 export default CartOverlayItem;
