@@ -33,9 +33,9 @@ export class CartImg extends Component{
     render(){
         return(
             <div>
-                <button className="left-arrow" onClick={this.handleClickLeft}><img src={`${Left}`} alt="right arrow"/></button>
+               {this.props.images.length > 1 ? <button className="left-arrow" onClick={this.handleClickLeft}><img src={`${Left}`} alt="right arrow"/></button> : null}
                     <img src={this.props.images[this.state.current]} alt="img" style={{maxWidth:`${this.props.width}`, maxHeight:`${this.props.height}`, paddingTop:'5px', }}/>
-                <button className="right-arrow" onClick={this.handleClickRight}><img src={`${Right}`} alt="left arrow"/></button>
+                {this.props.images.length > 1 ? <button className="right-arrow" onClick={this.handleClickRight}><img src={`${Right}`} alt="left arrow"/></button> : null}
             </div>
         );
     }

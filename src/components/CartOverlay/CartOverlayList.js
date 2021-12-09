@@ -48,10 +48,10 @@ export class CartOverlayList extends Component{
 
     render(){
         if(this.props.product.length === 0){
-            return <div className="cart-item">Bag is empty</div>
+            return <div className="cart-item" >Bag is empty</div>
         }
         return(
-            <div className="cart-overlay-list-container">
+            <div className="cart-overlay-list-container" >
                     <div className="cart-item">
                     <div style={{paddingLeft:'5px', fontWeight:'bold'}}>My bag, {this.props.count} items</div>
                         {  
@@ -118,6 +118,7 @@ CartOverlayList.propTypes = {
     countSelectedItem: PropTypes.func,
     attrChange: PropTypes.func,
     toDeleteItem: PropTypes.func,
+    isCartOpen: PropTypes.bool
 }
 
 export default withRouter(CartOverlayList);

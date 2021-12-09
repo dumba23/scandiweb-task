@@ -15,7 +15,7 @@ export class ProductItem extends Component{
 
     handleOpen(){
         this.props.onOpen(this.props.product);
-        this.props.history.push("/PDP");
+        this.props.history.push(`/PDP/${this.props.product.id}`);
     }
  
     handleInStockImg(){
@@ -31,7 +31,7 @@ export class ProductItem extends Component{
     }
 render(){
     return(
-        <div className="product-clothes" key={this.props.product.name} onClick={ this.handleOpen } >
+        <div className="product-clothes"  key={this.props.product.name} onClick={ this.handleOpen } >
         <div className="img">
             {this.handleInStockImg()} 
         </div>

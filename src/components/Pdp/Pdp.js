@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import { Query } from 'react-apollo';
 import { PDP_QUERY } from '../../queries';
 import PropTypes from 'prop-types';
+import { withRouter } from "react-router";
 
 import Gallery from './Gallery';
 import Price from './Price';
@@ -20,8 +21,9 @@ export class Pdp extends Component{
     }
     
     render(){
-        if(this.props.product){
-            const { id } = this.props.product;
+        const { location } = this.props;
+        const  id  = location.pathname.slice(5);
+        if(id){
             return(
                 <div className="item-container">
                     <Query query={PDP_QUERY} variables={{productId:id}}>
@@ -35,20 +37,20 @@ export class Pdp extends Component{
                                             <Gallery gallery={data.product.gallery}/>
                                             <div className="details">
                                                 <div className="item-name">
-                                                <p style={{fontWeight:'bold'}}>{this.props.product.brand}</p>
-                                                <p>{this.props.product.name}</p>
+                                                <p style={{fontWeight:'bold'}}>{data.product.brand}</p>
+                                                <p>{data.product.name}</p>
                                                 </div>
                                                 <div className="item-name">
-                                                <SizeTest inStock={this.props.product.inStock} attributesToStyle={this.props.attributesToStyle} itemId={data.product.id} selectedAttributes={this.props.selectedAttributes} attributes={data.product.attributes}/>
+                                                <SizeTest inStock={data.product.inStock} attributesToStyle={this.props.attributesToStyle} itemId={data.product.id} selectedAttributes={this.props.selectedAttributes} attributes={data.product.attributes}/>
                                                 </div>
                                                 <div className="item-name">
-                                                <Price price={this.props.product.prices} currency={this.props.currency}  quantity={1}/>
+                                                <Price price={data.product.prices} currency={this.props.currency}  quantity={1}/>
                                                 </div>
                                                 <div className="add-button" >
-                                                <AddButton selectedAttributes={this.props.attributes} product={this.props.product} inStock={this.props.product.inStock} onAdd={this.props.onAdd} onClick={this.cutArr}/>
+                                                <AddButton selectedAttributes={this.props.attributes} product={data.product} inStock={data.product.inStock} onAdd={this.props.onAdd} onClick={this.cutArr}/>
                                                 </div>
                                                 <div className="description"
-                                                dangerouslySetInnerHTML={{__html: this.cleanData(this.props.product.description)}}  
+                                                dangerouslySetInnerHTML={{__html: this.cleanData(data.product.description)}}  
                                                 />                                           
                                             </div>
                                         </div>
@@ -64,14 +66,16 @@ export class Pdp extends Component{
 }
 
 Pdp.propTypes = {
-    product: PropTypes.object,
     attributesToStyle: PropTypes.array,
     selectedAttributes: PropTypes.func,
     currency: PropTypes.string,
     attributes: PropTypes.array,
     onAdd: PropTypes.func,
-    clearAttributes: PropTypes.func
+    clearAttributes: PropTypes.func,
+    match: PropTypes.object.isRequired,
+    location: PropTypes.object.isRequired,
+    history: PropTypes.object.isRequired
 }
 
 
-export default Pdp;
+export default withRouter(Pdp);

@@ -13,8 +13,26 @@ import CartOverlayList from '../CartOverlay/CartOverlayList';
 export class Navbar extends Component{
     constructor(props){
         super(props);  
+        this.ref = React.createRef();
+        this.handleClickOutside = this.handleClickOutside.bind(this);
         this.toggle = this.toggle.bind(this);
         this.handleChange = this.handleChange.bind(this);  
+    }
+
+    componentDidMount(){
+        document.addEventListener('mousedown', this.handleClickOutside);
+    }
+
+    componentWillUnmount(){
+        document.addEventListener('mousedown', this.handleClickOutside);
+    }
+
+    handleClickOutside(e){
+        if(this.props.toggleAns){
+            if (this.ref && !this.ref.current.contains(e.target)) {
+                this.props.toggle(false);
+            }
+        }
     }
 
     handleChange(e){
@@ -81,11 +99,12 @@ export class Navbar extends Component{
                     <div className="cart-button" onClick={this.toggle} style={{backgroundImage: `url(${Cart})`, cursor:'pointer'  }}>
                        {this.props.toggleCount>0 &&  <div className="cart-count">{this.renderTotalItems()}</div> }
                     </div>    
-                    <div>
+                    <div ref={this.ref} onClick={this.handleClickOutside}>
                     {
                     this.props.toggleAns && 
-                    <React.Fragment>
+                    <div>
                     <CartOverlayList 
+                    isCartOpen={this.props.toggleAns}
                     selectedAttributes={this.props.selectedAttributes}
                     attrChange={this.props.attrChangeFromCart}
                     count={this.props.toggleCount} 
@@ -96,7 +115,7 @@ export class Navbar extends Component{
                     countSelectedItem={this.props.countSelectedItem}
                     />
                     
-                    </React.Fragment>
+                    </div>
                     } 
                     </div>           
                 </div>    

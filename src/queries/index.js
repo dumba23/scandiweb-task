@@ -17,6 +17,7 @@ export const PDP_QUERY = gql`
                 displayValue    
             }
         }
+        brand
         prices {
             amount
             currency

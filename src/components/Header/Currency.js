@@ -10,9 +10,17 @@ export class Currency extends Component{
     constructor(props){
         super(props);  
         this.myRef = React.createRef();
-        this.handleOutSideClick = this.handleOutSideClick.bind(this);
+        this.handleClickOutside = this.handleClickOutside.bind(this);
         this.handleChange = this.handleChange.bind(this);  
         this.handleDropdown = this.handleDropdown.bind(this);
+    }
+    
+    componentDidMount(){
+        document.addEventListener('mousedown', this.handleClickOutside);
+    }
+
+    componentWillUnmount(){
+        document.addEventListener('mousedown', this.handleClickOutside);
     }
 
     handleDropdown(){
@@ -23,9 +31,11 @@ export class Currency extends Component{
         this.props.onCurrencyChange(el)
     }
     
-    handleOutSideClick(e){
-        if(this.myRef.current && !this.myRef.current.contains(e.target)){
+    handleClickOutside(e){
+        if(this.props.currencyOpen){
+        if (this.myRef && !this.myRef.current.contains(e.target)) {
             this.props.currencySwitcher(false);
+        }
         }
     }
 

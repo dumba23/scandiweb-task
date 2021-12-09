@@ -10,6 +10,26 @@ export class SizeTest extends Component{
         }
     }
 
+    defaultStylingOnSwatch(type,value){
+        if( type === 'swatch'){
+            return {
+                backgroundColor:value
+            }
+        }
+    }
+
+    checkTypeToStyle(type,value){
+        if(type === 'swatch'){
+            return {
+                backgroundColor:value,
+                border:'2px solid #1D1F22'
+            }
+        }return {
+            backgroundColor:"#1D1F22",
+            color:"white"
+        }
+    }
+
     isAttributeActive(attrId,attrValue){
         const isActive = this.state.selectedAttributes.find(
             (selectedAttr) => 
@@ -51,7 +71,10 @@ export class SizeTest extends Component{
                                     key={index}
                                     value={value.displayValue} 
                                     onClick={e=>{this.props.selectedAttributes(item.id,e.target.value,this.props.itemId); this.handleSelectedAttributes(item.id,e.target.value)}}
-                                    style={this.isAttributeActive(item.id, value.displayValue) && this.props.inStock ? {backgroundColor:`${value.displayValue}`, opacity:'0.5' } :  {backgroundColor:`${value.displayValue}`}}
+                                    style=
+                                    {this.isAttributeActive(item.id, value.displayValue) && this.props.inStock ? 
+                                        this.checkTypeToStyle(item.type,value.displayValue) :  
+                                        this.defaultStylingOnSwatch(item.type,value.displayValue)}
                                     >
                                         {item.type === 'text' ? this.renderTypeText(value.displayValue,item.name) : '' }
                                     </button>

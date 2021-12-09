@@ -8,6 +8,10 @@ export class ProductList extends Component {
     Capitalize(str){
         return str.charAt(0).toUpperCase() + str.slice(1);
     }
+
+    onClick(id){
+        console.log(id)
+    }
     
     render() {
         return(
