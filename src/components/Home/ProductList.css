@@ -1,4 +1,27 @@
-.title{
-    color:#1D1F22
+.title {
+  color: #1d1f22;
 }
 
+.filter-reset-button {
+  background-color: #4caf50;
+  border: none;
+  color: white;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  font-size: 16px;
+  cursor: pointer;
+  margin-left: 0px;
+  margin-top: 10px;
+}
+
+.filter-reset-button:hover {
+  box-shadow: 0 4px 8px 0 rgb(0 0 0 / 20%), 0 6px 20px 0 rgb(0 0 0 / 19%);
+}
+
+.filter-container {
+  margin-left: 10px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
