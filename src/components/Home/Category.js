@@ -127,6 +127,7 @@ export class Category extends Component {
                   categoryName={data.category.name}
                   changeCurrency={this.props.activeCurrency}
                   attributes={attributes}
+                  onAdd={this.props.onAdd}
                 />
               );
             }
@@ -142,6 +143,7 @@ Category.propTypes = {
   onOpen: PropTypes.func,
   activeCurrency: PropTypes.string,
   history: PropTypes.object,
+  onAdd: PropTypes.func,
 };
 
 export default withRouter(Category);

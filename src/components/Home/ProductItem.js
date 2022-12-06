@@ -9,12 +9,29 @@ import "./ProductItem.css";
 export class ProductItem extends Component {
   constructor(props) {
     super(props);
+    this.ref = React.createRef();
     this.handleOpen = this.handleOpen.bind(this);
   }
 
-  handleOpen() {
-    this.props.onOpen(this.props.product);
-    this.props.history.push(`/PDP/${this.props.product.id}`);
+  handleOpen(e) {
+    if (e.target === this.ref.current) {
+      let defaultAttributes = [];
+      this.props.product.attributes.forEach((item) => {
+        defaultAttributes.push({
+          id: item.name,
+          itemId: this.props.product.id,
+          value: item.items[0].displayValue,
+        });
+      });
+      this.props.onAdd(
+        [this.props.product],
+        this.props.product.id,
+        defaultAttributes
+      );
+    } else {
+      this.props.onOpen(this.props.product);
+      this.props.history.push(`/PDP/${this.props.product.id}`);
+    }
   }
 
   handleInStockImg() {
@@ -46,12 +63,12 @@ export class ProductItem extends Component {
       <div
         className="product-clothes"
         key={this.props.product.name}
-        onClick={this.handleOpen}
+        onClick={(e) => this.handleOpen(e)}
       >
         <div className="img">{this.handleInStockImg()}</div>
         {this.props.product.inStock ? (
           <div className="circle-icon">
-            <img src={circle} alt="product" />
+            <img src={circle} alt="product" ref={this.ref} />
           </div>
         ) : null}
         <div className="content-clothes">
@@ -80,6 +97,7 @@ ProductItem.propTypes = {
   product: PropTypes.object,
   history: PropTypes.object,
   changeCurrency: PropTypes.string,
+  onAdd: PropTypes.func,
 };
 
 export default withRouter(ProductItem);

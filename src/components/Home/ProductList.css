@@ -1,5 +1,9 @@
 .title {
   color: #1d1f22;
+  font-style: normal;
+  font-size: 42px;
+  line-height: 160%;
+  font-family: "Raleway";
 }
 
 .filter-reset-button {

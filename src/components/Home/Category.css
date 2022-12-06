@@ -1,15 +1,15 @@
-.container{
-    font-family:raleway,sans-serif;
-    margin:auto;
-    display:flex;
-    flex-direction: column;
-    z-index:2;
+.container {
+  font-family: "Raleway", sans-serif;
+  margin: auto;
+  display: flex;
+  flex-direction: column;
+  z-index: 2;
 }
 
-.container-products{
-    max-width:1440px;
-    height:1513px;
-    margin:10px 0px 10px 217px;
-    padding:0.5em;
-    z-index:1;
+.container-products {
+  max-width: 1440px;
+  height: 1513px;
+  margin: 10px 0px 10px 217px;
+  padding: 0.5em;
+  z-index: 1;
 }

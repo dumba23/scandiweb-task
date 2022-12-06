@@ -14,7 +14,7 @@ export class ProductList extends Component {
     return (
       <div className="container-clothes">
         <div className="title">
-          <h1>{this.Capitalize(this.props.categoryName)}</h1>
+          <div>{this.Capitalize(this.props.categoryName)}</div>
         </div>
         <div className="products">
           <div
@@ -30,6 +30,7 @@ export class ProductList extends Component {
                 onOpen={this.props.onOpen}
                 product={product}
                 changeCurrency={this.props.changeCurrency}
+                onAdd={this.props.onAdd}
               />
             );
           })}
@@ -45,6 +46,7 @@ ProductList.propTypes = {
   onOpen: PropTypes.func,
   changeCurrency: PropTypes.string,
   attributes: PropTypes.object,
+  onAdd: PropTypes.func,
 };
 
 export default ProductList;
