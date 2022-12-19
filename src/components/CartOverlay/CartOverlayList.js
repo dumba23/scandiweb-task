@@ -49,13 +49,37 @@ export class CartOverlayList extends Component {
 
   render() {
     if (this.props.product.length === 0) {
-      return <div className="cart-item">Bag is empty</div>;
+      return <div className="cart-item"> <div
+      className="cart-overlay-list-total-price"
+      style={{ fontWeight: "bold" }}
+    >
+      <div>Total</div>
+      {this.getTotalPrice()}
+    </div>
+    <div className="cart-overlay-list-buttons">
+      <button
+        onClick={this.handleClick}
+        className="cart-overlay-list-view-bag-button cart-btn-disabled"
+        disabled={true}
+      >
+        {" "}
+        VIEW BAG{" "}
+      </button>
+      <button
+        onClick={this.handleClick}
+        className="cart-overlay-list-checkout-button cart-btn-disabled"
+        disabled={true}
+      >
+        {" "}
+        CHECKOUT{" "}
+      </button>
+    </div></div>;
     }
     return (
-      <div className="cart-overlay-list-container">
+      <div className="cart-overlay-list-container" style={{fontFamily: 'Raleway'}}>
         <div className="cart-item">
           <div style={{ paddingLeft: "5px", fontWeight: "bold" }}>
-            My bag, {this.props.count} items
+            My bag,<span style={{fontWeight: 500}}>{this.props.count} items</span> 
           </div>
           {this.props.product.map((item) => {
             return (
@@ -117,7 +141,6 @@ export class CartOverlayList extends Component {
             </button>
           </div>
         </div>
-        <div></div>
       </div>
     );
   }

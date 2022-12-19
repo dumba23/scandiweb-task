@@ -7,14 +7,8 @@ export class Price extends Component {
     return (
       <div className="price-container">
         <div
-          className="price-name"
-          style={{ fontSize: "18px", fontWeight: "bold" }}
-        >
-          {"PRICE:"}
-        </div>
-        <div
           className="price-amount"
-          style={{ fontSize: "20px", fontWeight: "bold" }}
+          style={{ fontSize: "16px", fontFamily: 'Raleway', fontWeight: 500 }}
         >
           {getSymbolFromCurrency(this.props.currency)}
           {this.props.price.map((price) => {

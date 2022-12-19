@@ -10,11 +10,11 @@ export class CartOverlayItem extends Component {
     return (
       <div className="cart-overlay-item-content">
         <div className="cart-overlay-product-name">
-          <span style={{ fontWeight: "bold" }}>
+          <span style={{ fontWeight: 300, fontFamily: 'Raleway', fontSize: '16px' }}>
             {this.props.product.item[0].brand}
           </span>
           <br />
-          <span className="cart-overlay-product-name-st">
+          <span className="cart-overlay-product-name-st" style={{ fontWeight: 300, fontFamily: 'Raleway', fontSize: '16px', }}>
             {this.props.product.item[0].name}
           </span>
         </div>

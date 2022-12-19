@@ -11,7 +11,7 @@ export class AddButton extends Component {
   handleAdd() {
     const finalProduct = [this.props.product];
     let productId = this.props.product.id;
-    if (this.props.selectedAttributes.length > 0) {
+    if (this.props.selectedAttributes.length === this.props.product.attributes.length) {
       this.props.onAdd(finalProduct, productId, this.props.selectedAttributes);
     }
   }
@@ -22,7 +22,7 @@ export class AddButton extends Component {
         <div>
           <button
             className={`${
-              this.props.selectedAttributes.length > 0
+              this.props.selectedAttributes.length === this.props.product.attributes.length
                 ? "add-to-cart"
                 : "add-to-cart-disabled"
             }`}

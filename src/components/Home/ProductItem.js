@@ -71,7 +71,7 @@ export class ProductItem extends Component {
             <img src={circle} alt="product" ref={this.ref} />
           </div>
         ) : null}
-        <div className="content-clothes">
+        <div className={`content-clothes ${this.props.product.inStock ? '' : 'disabled-brand'}`}>
           <div className="name">
             {`${this.props.product.brand} `}
             {this.props.product.name}

@@ -58,9 +58,15 @@
   cursor: pointer;
 }
 
+
 .cart-overlay-list-checkout-button:hover {
   cursor: pointer;
   background-color: #079c2f;
+}
+
+.cart-btn-disabled:hover {
+  background-color: black;
+  cursor:not-allowed;
 }
 
 .cart-overlay-img {

@@ -50,6 +50,12 @@ figure {
   height: 38px;
 }
 
+.disabled-brand {
+  color: #8D8F9A;
+  font-weight: 500;
+  font-size:18px;
+}
+
 .circle-icon img {
   width: 52px;
   height: 52px;
