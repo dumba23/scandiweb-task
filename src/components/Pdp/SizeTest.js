@@ -68,6 +68,7 @@ export class SizeTest extends Component{
                                 {item.items.map((value,index)=>{
                                     return (
                                     <button
+                                    className="size-btns"
                                     key={index}
                                     value={value.displayValue} 
                                     onClick={e=>{this.props.selectedAttributes(item.id,e.target.value,this.props.itemId); this.handleSelectedAttributes(item.id,e.target.value)}}

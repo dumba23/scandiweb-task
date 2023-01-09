@@ -29,7 +29,7 @@ export class Capacity extends Component {
     const { items, name } = options;
 
     return (
-      <div className="">
+      <div className="filter-item">
         <div>{name}:</div>
         <select
           value={defaultValue}

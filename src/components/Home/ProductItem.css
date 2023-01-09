@@ -31,12 +31,29 @@ figure {
   align-items: center;
   z-index: 10;
   flex-direction: column;
-  width: 386px;
-  height: 370px;
-  margin: 0px 90px 15px 0px;
-  /* padding: 16px 0px 25px 0px; */
-  padding: 2px 0px 25px 0px;
+  width: 30%;
+  padding: 1rem 0.2rem;
+  margin: 1rem 0rem;
+  margin-right: 2rem;
 }
+
+@media screen and (max-width: 1278px) {
+ .product-clothes {
+   width: 45%
+ }
+}
+
+@media screen and (max-width: 900px) {
+  .product-clothes {
+    width: 95%
+  }
+ }
+
+ @media screen and (max-width: 650px) {
+   .actions {
+    transform: translateX(2.5rem);  
+  }
+ }
 
 .product-clothes:hover {
   box-shadow: 0px 4px 35px rgba(168, 172, 176, 0.19);

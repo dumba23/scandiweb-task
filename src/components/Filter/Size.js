@@ -34,7 +34,7 @@ export class Select extends Component {
     }
 
     return (
-      <div className="">
+      <div className="filter-item">
         <div>{name}:</div>
         <div style={{ margin: "1px" }}>
           <select

@@ -19,7 +19,7 @@ export class Checkbox extends Component {
     const { items, name } = options;
 
     return (
-      <div className="">
+      <div className="filter-item">
         <div>{name}</div>
         <div style={{ display: "flex", flexDirection: "row" }}>
           {items.map((item, idx) => {

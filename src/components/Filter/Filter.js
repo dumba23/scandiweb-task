@@ -130,7 +130,7 @@ export class Filter extends Component {
           className="filter-reset-button"
           onClick={this.handleResetFilter}
         >
-          Reset
+          Reset Filters
         </button>
       </div>
     );

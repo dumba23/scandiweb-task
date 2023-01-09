@@ -28,7 +28,7 @@ export class Gallery extends Component{
                 </div>
                 <div className="item-main">
                     {
-                    <img alt="product" src={this.state.currentSrc} max-width="610px" height="511px"></img>
+                    <img className='pdp-img' alt="product" src={this.state.currentSrc} max-width="610px" height="511px"></img>
                     }
                 </div>
             </div>

@@ -15,18 +15,19 @@ export class CartImg extends Component{
     }
 
     handleClickRight(){
-        if(this.props.images.length > 1 && this.state.current !== this.props.images.length) {
+        if(this.props.images.length > 1 && this.state.current !== this.props.images.length - 1) {
             this.setState({current:this.state.current + 1});
         }else if(this.props.images.length > 1 && this.state.current === this.props.images.length-1){
-            this.setState({current:0});
+            this.setState({current:1});
         }
     }
 
     handleClickLeft(){
-        if(this.props.images.length > 1 && this.state.current !== 0){
+        console.log(this.props.images.length, "state:" + this.state.current)
+        if(this.props.images.length > 1 && this.state.current > 0){
             this.setState({current:this.state.current - 1});
         }else if (this.props.images.length > 1 && this.state.current === 0){
-            this.setState({current:this.props.images.length});
+            this.setState({current:this.props.images.length - 1});
         }
     }
 

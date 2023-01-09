@@ -13,16 +13,15 @@ export class ProductList extends Component {
   render() {
     return (
       <div className="container-clothes">
+        <div
+            className=""
+          >
+            <Filter attributes={this.props.attributes} />
+          </div>
         <div className="title">
           <div>{this.Capitalize(this.props.categoryName)}</div>
         </div>
         <div className="products">
-          <div
-            style={{ position: "absolute", left: "0" }}
-            className="filter-container"
-          >
-            <Filter attributes={this.props.attributes} />
-          </div>
           {this.props.products.map((product) => {
             return (
               <ProductItem

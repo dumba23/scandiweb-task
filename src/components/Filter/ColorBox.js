@@ -31,7 +31,7 @@ export class ColorBox extends Component {
     );
 
     return (
-      <div className="">
+      <div className="filter-item">
         <div>{name}:</div>
         <div style={{ display: "flex", flexDirection: "row" }}>
           {items.map((item, idx) => {

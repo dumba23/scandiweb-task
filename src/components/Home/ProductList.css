@@ -16,7 +16,8 @@
   font-size: 16px;
   cursor: pointer;
   margin-left: 0px;
-  margin-top: 10px;
+  width: 10rem;
+  transform: translateY(-5px);
 }
 
 .filter-reset-button:hover {
@@ -24,8 +25,17 @@
 }
 
 .filter-container {
-  margin-left: 10px;
+  padding: 1.2rem 0;
+  border-bottom: 2px solid #008000;
   display: flex;
-  flex-direction: column;
-  justify-content: center;
+  flex-direction: row;
+  flex-wrap: wrap;
+  width: 100%;
+  justify-content: space-between;
+}
+
+.filter-item {
+  width: 10rem;
+  margin-right: 5px;
+  margin-bottom: 10px;
 }
